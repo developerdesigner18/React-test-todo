@@ -34,6 +34,12 @@ const TaskList = (props: any) => {
     }
   };
 
+  const smoothingTheUpdateBox = (id: String, title: String, desc: String) => {
+    setSelectedID(id);
+    setTitleToUpdate(title);
+    setDescToUpdate(desc);
+  };
+
   return (
     <div className="task_list_container">
       <div className="task_bar_holder">
@@ -58,7 +64,9 @@ const TaskList = (props: any) => {
                   />
                 )}
                 <BiCalendarEdit
-                  onClick={() => setSelectedID(item.id)}
+                  onClick={() =>
+                    smoothingTheUpdateBox(item.id, item.title, item.description)
+                  }
                   className="complete_icon"
                 />
                 <BiTrash
@@ -87,6 +95,7 @@ const TaskList = (props: any) => {
                 </div>
                 <div className="update_field_holder">
                   <input
+                    value={titleToUpdate.toString()}
                     placeholder={`Update title`}
                     className="update_title_field"
                     onChange={(e) => {
@@ -94,6 +103,7 @@ const TaskList = (props: any) => {
                     }}
                   />
                   <input
+                    value={descToUpdate.toString()}
                     placeholder={`Update description`}
                     className="update_desc_field"
                     onChange={(e) => {
